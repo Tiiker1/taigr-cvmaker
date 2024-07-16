@@ -45,6 +45,15 @@ const GenerateCV = () => {
     });
   };
 
+  const handleDeleteEducation = (index) => {
+    const updatedEducation = [...formData.education];
+    updatedEducation.splice(index, 1); // Remove the education entry at index
+    setFormData({
+      ...formData,
+      education: updatedEducation,
+    });
+  };
+
   const handleAddSkill = () => {
     setFormData({
       ...formData,
@@ -70,9 +79,12 @@ const GenerateCV = () => {
           <input type="email" name="email" placeholder="Email" value={formData.email} onChange={handleChange} required />
           <input type="tel" name="phone" placeholder="Phone" value={formData.phone} onChange={handleChange} required />
           
+          
           {formData.education.map((edu, index) => (
-            <div key={index} className="education-section">
-              <h3>Education {index + 1}</h3>
+        <div key={index} className="education-section">
+          <h3>Education {index + 1}</h3>
+          <button type="button" className="btn" onClick={() => handleDeleteEducation (index)}>Delete</button>
+          {/* Input fields for education */}
               <input
                 type="text"
                 name={`education.school`}
@@ -116,7 +128,7 @@ const GenerateCV = () => {
             </div>
           ))}
           <button type="button" className="btn" onClick={handleAddEducation}>Add Education</button>
-          
+
           <div className="skills-section">
             <h3>Skills</h3>
             {formData.skills.map((skill, index) => (
@@ -140,11 +152,12 @@ const GenerateCV = () => {
       ) : (
         <div>
           <DisplayCV ref={componentRef} formData={formData} />
-          <button onClick={handlePrint} className="btn">Download as PDF</button>
+          <button onClick={handlePrint} className="btn">Download PDF</button>
         </div>
       )}
     </div>
   );
 };
+
 
 export default GenerateCV;

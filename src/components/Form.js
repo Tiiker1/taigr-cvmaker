@@ -37,6 +37,22 @@ const Button = styled.button`
   margin-right: 10px;
 `;
 
+const EducationContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 10px;
+`;
+
+const EducationTag = styled.div`
+  background: #555;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 20px;
+  margin: 5px;
+  display: flex;
+  align-items: center;
+`;
+
 const SkillsContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -72,6 +88,7 @@ const Form = ({ onSubmit }) => {
     picture: ''
   });
 
+  const [educationInput, setEducationInput] = useState('');
   const [skillInput, setSkillInput] = useState('');
 
   const handleChange = (e) => {
@@ -84,17 +101,14 @@ const Form = ({ onSubmit }) => {
   };
 
   const addEducation = () => {
-    setFormData({ ...formData, education: [...formData.education, ''] });
+    if (educationInput && !formData.education.includes(educationInput)) {
+      setFormData({ ...formData, education: [...formData.education, educationInput] });
+      setEducationInput('');
+    }
   };
 
-  const removeEducation = (index) => {
-    const newEducation = formData.education.filter((_, i) => i !== index);
-    setFormData({ ...formData, education: newEducation });
-  };
-
-  const handleEducationChange = (index, value) => {
-    const newEducation = formData.education.map((edu, i) => (i === index ? value : edu));
-    setFormData({ ...formData, education: newEducation });
+  const removeEducation = (educationToRemove) => {
+    setFormData({ ...formData, education: formData.education.filter(edu => edu !== educationToRemove) });
   };
 
   const addSkill = () => {
@@ -120,13 +134,22 @@ const Form = ({ onSubmit }) => {
         <Input type="email" name="email" placeholder="Email" onChange={handleChange} required />
         <Input type="tel" name="phone" placeholder="Phone" onChange={handleChange} required />
         <Input type="file" name="picture" onChange={handleChange} required />
+        <Input
+          type="text"
+          placeholder="Add an education"
+          value={educationInput}
+          onChange={(e) => setEducationInput(e.target.value)}
+          onKeyPress={(e) => e.key === 'Enter' && (e.preventDefault(), addEducation())}
+        />
         <Button type="button" onClick={addEducation}>Add Education</Button>
-        {formData.education.map((edu, index) => (
-          <div key={index}>
-            <Input type="text" value={edu} onChange={(e) => handleEducationChange(index, e.target.value)} placeholder="Education" />
-            <Button type="button" onClick={() => removeEducation(index)}>Remove</Button>
-          </div>
-        ))}
+        <EducationContainer>
+          {formData.education.map((edu, index) => (
+            <EducationTag key={index}>
+              {edu}
+              <RemoveButton onClick={() => removeEducation(edu)}>&times;</RemoveButton>
+            </EducationTag>
+          ))}
+        </EducationContainer>
         <Input
           type="text"
           placeholder="Add a skill"

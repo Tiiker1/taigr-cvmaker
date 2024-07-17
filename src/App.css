@@ -1,135 +1,38 @@
-body {
-  font-family: 'Lato', sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #f0f2f5;
-}
-
 .App {
   text-align: center;
 }
 
-.home, .generate-cv {
-  margin: 20px;
-  padding: 20px;
-  background-color: white;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
 }
 
-h1 {
-  color: #333;
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
 }
 
-p {
-  color: #666;
-}
-
-.btn {
-  padding: 10px 20px;
-  margin-top: 20px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.btn:hover {
-  background-color: #0056b3;
-}
-
-input, textarea {
-  width: 100%;
-  padding: 10px;
-  margin: 10px 0;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-textarea {
-  height: 100px;
-}
-
-form {
-  max-width: 600px;
-  margin: auto;
-}
-
-.cv {
-  margin: 20px auto;
-  padding: 40px;
-  background-color: white;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
-  max-width: 800px;
-  color: #333;
-  font-size: 16px;
-  line-height: 1.5;
-}
-
-.cv-header {
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
-  border-bottom: 2px solid #007bff;
-  padding-bottom: 10px;
-  margin-bottom: 20px;
-}
-
-.cv-name {
-  font-size: 32px;
-  font-weight: 700;
-  margin: 0;
-}
-
-.cv-contact p {
-  margin: 0;
-}
-
-.cv-section {
-  margin-bottom: 30px;
-}
-
-.cv-section h2 {
-  margin-bottom: 15px;
-  color: #007bff;
-  font-size: 24px;
-  border-bottom: 1px solid #ccc;
-  padding-bottom: 5px;
-}
-
-.cv-education-item {
-  margin-bottom: 15px;
-}
-
-.cv-skills {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-.cv-skill {
-  background-color: #007bff;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
   color: white;
-  padding: 5px 10px;
-  border-radius: 4px;
-  font-size: 14px;
 }
 
-@media print {
-  body {
-    background-color: white;
-  }
+.App-link {
+  color: #61dafb;
+}
 
-  .home, .generate-cv, .cv {
-    box-shadow: none;
-    border-radius: 0;
-    margin: 0;
-    padding: 20px;
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
   }
-
-  .btn {
-    display: none;
+  to {
+    transform: rotate(360deg);
   }
 }
